@@ -20,3 +20,11 @@ spring:
           headhunter:
             authorization-uri: https://hh.ru/oauth/authorize
             token-uri: https://hh.ru/oauth/token
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connectTimeout: 5000
+            readTimeout: 5000
+            loggerLevel: basic
