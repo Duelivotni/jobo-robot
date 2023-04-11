@@ -72,10 +72,8 @@ public class OAuth2Controller {
         if (!Objects.equals(state , userSession.get(KEY_STATE))) {
             httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
         } else {
-            log.info("Getting access token by code: {} for service id: {}", code, serviceId);
             OAuth20Service oAuth20Service = oAuth2ServiceFactory.getService(serviceId);
             OAuth2AccessToken accessToken = oAuth20Service.getAccessToken(code);
-
             OAuth2ServiceFactory.OAuth2Api oAuth2Api = (OAuth2ServiceFactory.OAuth2Api) oAuth20Service.getApi();
             final OAuthRequest oAuthRequest = new OAuthRequest(Verb.GET , oAuth2Api.getUserInfoEndpoint());
             oAuth20Service.signRequest(accessToken , oAuthRequest);

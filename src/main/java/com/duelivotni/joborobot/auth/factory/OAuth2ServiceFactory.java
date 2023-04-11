@@ -3,7 +3,6 @@ package com.duelivotni.joborobot.auth.factory;
 import com.duelivotni.joborobot.auth.properties.OAuth2Properties;
 import com.github.scribejava.apis.HHApi;
 import com.github.scribejava.core.builder.ServiceBuilder;
-import com.github.scribejava.core.builder.api.DefaultApi20;
 import com.github.scribejava.core.extractors.OAuth2AccessTokenExtractor;
 import com.github.scribejava.core.extractors.OAuth2AccessTokenJsonExtractor;
 import com.github.scribejava.core.extractors.TokenExtractor;
@@ -29,7 +28,6 @@ public class OAuth2ServiceFactory {
 
         OAuth2Properties.Registration registration = oAuth2Properties.getRegistration().get(serviceId);
         OAuth2Properties.Provider provider = oAuth2Properties.getProvider().get(serviceId);
-
         OAuth20Service oAuth20Service = new ServiceBuilder(registration.getClientId())
                 .apiSecret(registration.getClientSecret())
                 .callback(registration.getRedirectUri())
@@ -38,12 +36,11 @@ public class OAuth2ServiceFactory {
                 .userAgent("HelloKoding")
                 .build(new OAuth2Api(provider));
         services.put(serviceId, oAuth20Service);
-        log.info("Created OAuth20Service for headhunter oauth2. ClientId: {}, client secret: {}", registration.getClientId(), registration.getClientSecret());
         return oAuth20Service;
     }
 
     @RequiredArgsConstructor
-    public class OAuth2Api extends DefaultApi20 {
+    public class OAuth2Api extends HHApi {
         private final OAuth2Properties.Provider provider;
 
         @Override
