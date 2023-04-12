@@ -21,31 +21,5 @@ oauth2:
         authorizationUri: https://hh.ru/oauth/authorize
         tokenUri: https://hh.ru/oauth/token
         userInfoUri: https://api.hh.ru/me
+        revokeTokenUri: https://api.hh.ru/oauth/token
         revokePermissionUri: https://api.hh.ru/oauth/token
-#  cloud:
-#    openfeign:
-#      client:
-#        config:
-#          default:
-#            connectTimeout: 5000
-#            readTimeout: 5000
-#            loggerLevel: basic
-#spring:
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          google:
-#            client-id: 161188401130-gpc5n2k398grub1jq1kflic9nd7g1hvi.apps.googleusercontent.com
-#            client-secret: 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
-#          headhunter:
-#            client-id: JQGJM6V5NNDRT6PDEHEUF4LDKQF684MU6PNHTO74VAEJ01QGTG3LTVJHBA3QQOOS
-#            client-secret: PNS48L8OM9N6P470RO7Q22B2KBORAOBABMCPRDEU5N6V9GH7OOFG92MJBE1F7B3A
-#            client-authentication-method: post
-#            authorization-grant-type: authorization_code
-#            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-#            response_type: code
-#        provider:
-#          headhunter:
-#            authorization-uri: https://hh.ru/oauth/authorize
-#            token-uri: https://hh.ru/oauth/token

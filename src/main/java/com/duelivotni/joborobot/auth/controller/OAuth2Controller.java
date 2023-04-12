@@ -114,8 +114,8 @@ public class OAuth2Controller {
         if (Objects.nonNull(user)) {
             String serviceId = user.get(KEY_SERVICE_ID);
             OAuth20Service oAuth20Service = oAuth2ServiceFactory.getService(serviceId);
-            if (Objects.equals("facebook" , serviceId)) {
-                revokeFacebookPermission(oAuth20Service , user);
+            if (Objects.equals("facebook" , serviceId) || Objects.equals("headhunter" , serviceId)) {
+                revokePermission(oAuth20Service , user);
             } else if (!oAuth20Service.getApi().getRevokeTokenEndpoint().isEmpty()) {
                 oAuth20Service.revokeToken(user.get(KEY_ACCESS_TOKEN) , TokenTypeHint.ACCESS_TOKEN);
             }
@@ -123,7 +123,7 @@ public class OAuth2Controller {
         }
     }
 
-    private void revokeFacebookPermission(OAuth20Service oAuth20Service , Map<String, String> user) throws InterruptedException, ExecutionException, IOException {
+    private void revokePermission(OAuth20Service oAuth20Service , Map<String, String> user) throws InterruptedException, ExecutionException, IOException {
         OAuth2ServiceFactory.OAuth2Api oAuth2Api = (OAuth2ServiceFactory.OAuth2Api) oAuth20Service.getApi();
         String endPoint = oAuth2Api.getRevokePermissionEndpoint().replace("{user-id}" , user.get("id"));
         final OAuthRequest oAuthRequest = new OAuthRequest(Verb.DELETE , endPoint);
