@@ -8,3 +8,5 @@ https://hellokoding.com/login-with-oauth2-and-openid-connect-in-spring-boot-with
 https://github.com/scribejava/scribejava
 # Redirect URL
 http://localhost:8080/login/oauth2/code/github
+# Basic API url
+https://api.hh.ru/
