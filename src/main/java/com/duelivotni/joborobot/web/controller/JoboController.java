@@ -1,4 +1,4 @@
-package com.duelivotni.joborobot.web;
+package com.duelivotni.joborobot.web.controller;
 
 import com.duelivotni.joborobot.models.request.VacanciesSearchRequest;
 import com.duelivotni.joborobot.models.response.VacanciesSearchResponse;

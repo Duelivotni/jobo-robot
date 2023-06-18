@@ -33,6 +33,6 @@ public class OAuth2Properties {
         private String userInfoUri;
         private String revokeTokenUri;
         private String revokePermissionUri;
-        private String userNameAttribute = "name";
+        private String userNameAttribute = "email";
     }
 }

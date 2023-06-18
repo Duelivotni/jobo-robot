@@ -22,6 +22,10 @@
     <div id="welcome" style="display:none">
         Welcome <span id="name"></span> | <button onClick="logout()">Logout</button>
     </div>
+    <div id="vacancies-list" style="display:none">
+        Vacancies available:
+        <ul id="vacancies"></ul> | <button onclick="getVacancies()">Get vacancies</button>
+    </div>
 </div>
 <script>
     fetch('/user')
@@ -41,6 +45,32 @@
             console.error('Error: ', error);
         });
 
+    function getVacancies() {
+        fetch("/api/vacancies")
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Failed to fetch vacancies")
+                }
+            })
+            .then((responseJson) => {
+                const  vacanciesList = document.getElementById('vacancies');
+                vacanciesList.innerHTML = '';    // clear previous vacancies
+
+                responseJson.vacancies.forEach((vacancy) => {
+                    const listItem = document.createElement('li');
+                    listItem.innerText = vacancy.name;
+                    vacanciesList.appendChild(listItem);
+                });
+
+                document.getElementById('vacancies-list').style.display = 'block'
+            })
+            .catch((error) => {
+                console.error('Error: ', error)
+            });
+    }
+
     function logout() {
         fetch('/logout', {
             method: 'POST',
@@ -52,6 +82,7 @@
                 if (response.ok) {
                     document.getElementById('login').style.display = 'block';
                     document.getElementById('welcome').style.display = 'none';
+                    document.getElementById('vacancies-list').style.display = 'none';
                 } else {
                     throw new Error('Something went wrong');
                 }

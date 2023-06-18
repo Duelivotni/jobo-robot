@@ -23,3 +23,10 @@ oauth2:
         userInfoUri: https://api.hh.ru/me
         revokeTokenUri: https://api.hh.ru/oauth/token
         revokePermissionUri: https://api.hh.ru/oauth/token
+api:
+  headhunter:
+    urls:
+      searchVacanciesUrl: https://api.hh.ru/vacancies
+  http:
+    connection-timeout: 8000
+    read-timeout: 8000

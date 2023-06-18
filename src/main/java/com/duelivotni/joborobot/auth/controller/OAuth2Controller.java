@@ -70,6 +70,7 @@ public class OAuth2Controller {
     @GetMapping("/login/oauth2/code/{serviceId}")
     public RedirectView oauth2Code(@PathVariable String serviceId , String code , String state) throws InterruptedException, ExecutionException, IOException {
         if (!Objects.equals(state , userSession.get(KEY_STATE))) {
+            log.warn("Failed to get by KEY_STATE from user session. State = {}", state);
             httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
         } else {
             OAuth20Service oAuth20Service = oAuth2ServiceFactory.getService(serviceId);
@@ -82,6 +83,7 @@ public class OAuth2Controller {
             map.put(KEY_SERVICE_ID , serviceId);
             map.put(KEY_USERNAME , map.get(oAuth2Api.getUserNameAttribute()));
             int expiresIn = Optional.ofNullable(accessToken.getExpiresIn()).orElse(3600);
+            log.info("Putting into redis: {}, {} expires in {}", KEY_USER, map, expiresIn);
             userSession.put(KEY_USER , map , Duration.of(expiresIn , ChronoUnit.SECONDS));
         }
 
@@ -97,6 +99,7 @@ public class OAuth2Controller {
     @GetMapping("/user")
     public Map user(HttpServletRequest request) {
         Map user = ((Map) userSession.get(KEY_USER));
+        log.info("Fetched User by key={} from redis User Session. User = {}", KEY_USER, user);
         return Objects.isNull(user) ? null : Collections.singletonMap(KEY_USERNAME , user.get(KEY_USERNAME));
     }
 
