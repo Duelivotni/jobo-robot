@@ -1,10 +1,12 @@
 package com.duelivotni.joborobot.models.request;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
 
 @Data
+@Builder
 public class VacanciesSearchRequest implements Serializable {
 
     private Integer page;

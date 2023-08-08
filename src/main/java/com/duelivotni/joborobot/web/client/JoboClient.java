@@ -22,7 +22,7 @@ public class JoboClient {
     public ResponseEntity<VacanciesSearchResponse> fetchVacancies(VacanciesSearchRequest request, String bearer) throws IOException {
         String url = joboConfig.getSearchVacanciesUrl();
         HttpHeaders headers = prepAuthJsonHeader(bearer);
-        headers.set("Content-type", MediaType.APPLICATION_JSON_VALUE);
+//        headers.set("Content-type", MediaType.APPLICATION_JSON_VALUE);
         return restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(request, headers), VacanciesSearchResponse.class);
     }
 
@@ -38,7 +38,7 @@ public class JoboClient {
     private HttpHeaders prepAuthJsonHeader(String BearerToken) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + BearerToken);
-        headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+//        headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
         headers.set("HH-User-Agent", "jobo-robot (souji07031988@gmail.com)");
         return headers;
     }

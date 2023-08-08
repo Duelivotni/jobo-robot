@@ -17,7 +17,10 @@ public class JoboController {
     private final JoboService service;
 
     @GetMapping("/vacancies")
-    public VacanciesSearchResponse getVacancies(@RequestBody VacanciesSearchRequest request) {
+    public VacanciesSearchResponse getVacancies() {
+        var request = VacanciesSearchRequest.builder()
+                .onlyWithSalary(true)
+                .build();
         return service.getVacancies(request);
     }
 }

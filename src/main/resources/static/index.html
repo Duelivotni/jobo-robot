@@ -40,6 +40,7 @@
             document.getElementById('name').innerText = responseJson.username;
             document.getElementById('login').style.display = 'none';
             document.getElementById('welcome').style.display = 'block';
+            document.getElementById('vacancies-list').style.display = 'block';
         })
         .catch((error) => {
             console.error('Error: ', error);

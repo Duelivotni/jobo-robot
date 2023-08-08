@@ -14,7 +14,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class JoboService {
     private static final String KEY_USER = "user";
-    private static final String TOKEN_KEY = "Bearer";
+    private static final String TOKEN_KEY = "accessToken";
 
     private final JoboClient client;
     private final UserSessionInRedis userSession;
